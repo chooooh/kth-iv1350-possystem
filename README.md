@@ -1,1 +1,2 @@
-# kth-iv1350-seminars
+# kth-iv1350-possystem
+A school assignment
