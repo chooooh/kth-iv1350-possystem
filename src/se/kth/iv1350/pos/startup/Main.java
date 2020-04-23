@@ -10,6 +10,7 @@ import se.kth.iv1350.pos.view.View;
  * Starts the application, contains the main method used to start the application.
  */
 public class Main {
+
     /**
      * The main method used to start the application.
      * @param args The application will not take any command line parameters.

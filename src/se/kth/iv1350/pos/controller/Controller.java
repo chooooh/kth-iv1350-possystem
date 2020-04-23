@@ -1,6 +1,7 @@
 package se.kth.iv1350.pos.controller;
 
 import se.kth.iv1350.pos.integration.*;
+import se.kth.iv1350.pos.model.Amount;
 import se.kth.iv1350.pos.model.CashRegister;
 import se.kth.iv1350.pos.model.Sale;
 
@@ -40,9 +41,20 @@ public class Controller {
     }
 
 
+    /**
+     * This method checks if the specified itemID is valid, if it is valid, return the matching item. Else, return null.
+     * The parameter itemQuantity specifies the quantity.
+     * @param itemID
+     * @param itemQuantity
+     * @return fetchedItem
+     */
     public ItemDTO registerItem(int itemID, int itemQuantity) {
-        ItemDTO fetchedItem_placeholder = new ItemDTO();
-
-        return fetchedItem_placeholder;
+        boolean itemIsValid = itemCatalog.validateItem(itemID);
+        if(itemIsValid) {
+            return itemCatalog.fetchItem(itemID, itemQuantity);
+        }
+        return null;
     }
+
+
 }
