@@ -1,22 +1,21 @@
 package se.kth.iv1350.pos.integration;
 
+import java.util.Objects;
+
 /**
  * This class contains all information about item objects.
  */
 public class ItemDTO {
-    private int itemQuantity;
     private final int itemID;
     private final ItemDescriptionDTO itemDescriptionDTO;
 
     /**
      * Creates a new instance of the itemDTO.
      * @param itemID
-     * @param itemQuantity
      * @param itemDescriptionDTO
      */
-    public ItemDTO(int itemID, int itemQuantity, ItemDescriptionDTO itemDescriptionDTO) {
+    public ItemDTO(int itemID, ItemDescriptionDTO itemDescriptionDTO) {
         this.itemID = itemID;
-        this.itemQuantity = itemQuantity;
         this.itemDescriptionDTO = itemDescriptionDTO;
     }
 
@@ -24,14 +23,25 @@ public class ItemDTO {
         return itemID;
     }
 
-    public int getItemQuantity() {
-        return itemQuantity;
-    }
-
     public ItemDescriptionDTO getItemDescriptionDTO() {
         return itemDescriptionDTO;
     }
 
+    @Override
+    public String toString() {
+        return "ItemDTO{" +
+                "itemID=" + itemID +
+                ", itemDescriptionDTO=" + itemDescriptionDTO +
+                '}';
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        ItemDTO other = (ItemDTO) obj;
+        return itemID == other.itemID &&
+                Objects.equals(itemDescriptionDTO, other.itemDescriptionDTO);
+    }
 
 }

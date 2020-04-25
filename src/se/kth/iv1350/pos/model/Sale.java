@@ -2,8 +2,7 @@ package se.kth.iv1350.pos.model;
 
 import se.kth.iv1350.pos.integration.ItemDTO;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 /**
  * This class sale has sale related operations and attributes.
@@ -12,7 +11,7 @@ public class Sale {
     private LocalTime time;
     private SaleInformation saleInformation;
     private Amount runningTotal;
-    private List<ItemDTO> itemDTOList = new ArrayList<ItemDTO>();
+    private HashMap<ItemDTO, Integer> itemMap = new HashMap<ItemDTO, Integer>();
 
     /**
      * Creates a new instance and saves the time of the sale.
@@ -22,60 +21,34 @@ public class Sale {
         saleInformation = new SaleInformation();
     }
 
-    public List<ItemDTO> getItemDTOList() {
-        return itemDTOList;
+    public HashMap getItemDTOMap() {
+        return itemMap;
     }
-
-    //obs! gör hashmap!
 
     /**
      * Appends <code>itemDTO</code> to itemDTOList if there's no duplicate of the specified item.
      * If there is a duplicate of the specified item in the item, update quantity.
      * @param itemDTO
+     * @param itemQuantity
+     * @return
      */
-    public String addItem(ItemDTO itemDTO) {
-        ItemDTO item;
-        if(itemListContains(itemDTO)) {
-            item = getItemDTOWithId(itemDTO.getItemID());
-            updateQuantity(itemDTO, item.getItemID());
-        } else {
-            itemDTOList.add(itemDTO);
-        }
-        return itemDTO.getItemDescriptionDTO().toString();
+    public String addItem(ItemDTO itemDTO, int itemQuantity) {
+        if(itemMapContains(itemDTO))
+            updateQuantity(itemDTO, itemQuantity);
+        else
+            itemMap.put(itemDTO, itemQuantity);
+        String infoToDisplay = itemDTO.getItemDescriptionDTO().toString();
+        return infoToDisplay;
     }
 
-    private boolean itemListContains(ItemDTO itemDTO) {
-        for(ItemDTO item : itemDTOList) {
-            if(item.getItemID() == itemDTO.getItemID())
-                return true;
-        }
-        return false;
+    private boolean itemMapContains(ItemDTO itemDTO) {
+        return itemMap.containsKey(itemDTO);
     }
 
-    private ItemDTO getItemDTOWithId(int itemID) {
-        for(ItemDTO item : itemDTOList) {
-            if(item.getItemID() == itemID)
-                return item;
-        }
-        return null;
-    }
-
-    private void updateQuantity(ItemDTO item, int itemID) {
-        ItemDTO newItem = new ItemDTO(item.getItemID(), item.getItemQuantity() + getItemDTOWithId(itemID).getItemQuantity(), item.getItemDescriptionDTO());
-        itemDTOList.remove(item);
-        itemDTOList.add(newItem);
+    private void updateQuantity(ItemDTO itemDTO, int itemQuantity) {
+        itemMap.put(itemDTO, itemMap.get(itemDTO) + itemQuantity);
     }
 
 
-//    public void calculateTotal() {
-//    }
-//
-//    /**
-//     *
-//     * @param discount
-//     * @return
-//     */
-//    public Discount applyDiscount(Discount discount) {
-//        return discount;
-//    }
+
 }

@@ -45,14 +45,29 @@ public class Controller {
      * The parameter itemQuantity specifies the quantity.
      * @param itemID
      * @param itemQuantity
-     * @return fetchedItem
+     * @return The item retrieved when using this method.
      */
     public ItemDTO registerItem(int itemID, int itemQuantity) {
         boolean itemIsValid = itemCatalog.validateItem(itemID);
         if(itemIsValid) {
-            return itemCatalog.fetchItem(itemID, itemQuantity);
+            ItemDTO fetchedItem = itemCatalog.fetchItem(itemID);
+            currentSale.addItem(fetchedItem, itemQuantity);
+            return fetchedItem;
         }
         return null;
+    }
+
+
+    // OBS! SKRIV TEST!
+    /**
+     * This method calls all necessary operations in order to retrieve a discount.
+     * @param customerID
+     * @return A string discount to display on the view.
+     */
+    public String checkDiscount(int customerID) {
+        Discount discount = discountCatalog.checkDiscount(customerID);
+        String infoToDisplay = discount.getDiscount().toString();
+        return infoToDisplay;
     }
 
 
