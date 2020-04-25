@@ -7,7 +7,7 @@ import java.util.List;
  *
  */
 public class ItemCatalog {
-    private List<ItemDTO> itemDTOList = new ArrayList<ItemDTO>();
+    private List<ItemDTO> itemList = new ArrayList<ItemDTO>();
 
     /**
      * Creates an instance. This class holds all item objects.
@@ -21,7 +21,7 @@ public class ItemCatalog {
      * @return boolean
      */
     public boolean validateItem(int itemID) {
-        return itemDTOList.contains(itemID);
+        return itemList.contains(itemID);
     }
 
     /**
@@ -32,7 +32,7 @@ public class ItemCatalog {
      * @return ItemDTO
      */
     public ItemDTO fetchItem(int itemID, int itemQuantity) {
-        for(ItemDTO item : itemDTOList) {
+        for(ItemDTO item : itemList) {
             if(item.getItemID() == itemID)
                 return item;
         }

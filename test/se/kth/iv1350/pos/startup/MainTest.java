@@ -3,11 +3,6 @@ package se.kth.iv1350.pos.startup;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import se.kth.iv1350.pos.controller.Controller;
-import se.kth.iv1350.pos.integration.CatalogCreator;
-import se.kth.iv1350.pos.integration.ExternalSystemCreator;
-import se.kth.iv1350.pos.integration.Printer;
-import se.kth.iv1350.pos.view.View;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

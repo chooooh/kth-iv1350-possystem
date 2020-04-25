@@ -3,21 +3,21 @@ package se.kth.iv1350.pos.integration;
 /**
  * This class contains all information about item objects.
  */
-public final class ItemDTO {
+public class ItemDTO {
+    private int itemQuantity;
     private final int itemID;
-    private final int itemQuantity;
-    private final ItemDescription itemDescription;
+    private final ItemDescriptionDTO itemDescriptionDTO;
 
     /**
      * Creates a new instance of the itemDTO.
      * @param itemID
      * @param itemQuantity
-     * @param itemDescription
+     * @param itemDescriptionDTO
      */
-    public ItemDTO(int itemID, int itemQuantity, ItemDescription itemDescription) {
+    public ItemDTO(int itemID, int itemQuantity, ItemDescriptionDTO itemDescriptionDTO) {
         this.itemID = itemID;
         this.itemQuantity = itemQuantity;
-        this.itemDescription = itemDescription;
+        this.itemDescriptionDTO = itemDescriptionDTO;
     }
 
     public int getItemID() {
@@ -28,8 +28,10 @@ public final class ItemDTO {
         return itemQuantity;
     }
 
-    public ItemDescription getItemDescription() {
-        return itemDescription;
+    public ItemDescriptionDTO getItemDescriptionDTO() {
+        return itemDescriptionDTO;
     }
+
+
 
 }
