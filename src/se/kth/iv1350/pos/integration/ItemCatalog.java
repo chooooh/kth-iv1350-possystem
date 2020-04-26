@@ -10,6 +10,9 @@ import java.util.List;
  */
 public class ItemCatalog {
     private List<ItemDTO> itemList = new ArrayList<ItemDTO>();
+    private final Amount VAT_TWENTY_FIVE = new Amount(1.25);
+    private final Amount VAT_TWELVE = new Amount(1.12);
+    private final Amount VAT_FIVE = new Amount(1.05);
 
     /**
      * Creates an instance. This class holds all item objects. The method @link
@@ -46,9 +49,9 @@ public class ItemCatalog {
     }
 
     private void addItems() {
-        ItemDescriptionDTO appleDescription = new ItemDescriptionDTO("Apple", new Amount(10), new Amount(5));
-        ItemDescriptionDTO milkDescription = new ItemDescriptionDTO("Milk", new Amount(20), new Amount(5));
-        ItemDescriptionDTO SpinachDescription = new ItemDescriptionDTO("Spinach", new Amount(30), new Amount(5));
+        ItemDescriptionDTO appleDescription = new ItemDescriptionDTO("Apple", new Amount(10), VAT_TWENTY_FIVE);
+        ItemDescriptionDTO milkDescription = new ItemDescriptionDTO("Milk", new Amount(20), VAT_TWELVE);
+        ItemDescriptionDTO SpinachDescription = new ItemDescriptionDTO("Spinach", new Amount(30), VAT_TWELVE);
 
         itemList.add(new ItemDTO(1, appleDescription));
         itemList.add(new ItemDTO(2, milkDescription));

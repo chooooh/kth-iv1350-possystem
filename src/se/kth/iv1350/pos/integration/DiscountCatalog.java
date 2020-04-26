@@ -19,7 +19,7 @@ public class DiscountCatalog {
     /**
      * This method returns a discount based on specified customerID.
      * @param customerID
-     * @return Return discount if specified customerID has a discount, otherwise return 1, as in 100% of the original price.
+     * @return Return discount if specified customerID has a discount, otherwise return the amount 1, as in 100% of the original price.
      */
     public Discount checkDiscount(int customerID) {
         if(discountExists(customerID))
@@ -33,7 +33,7 @@ public class DiscountCatalog {
     }
 
     /**
-     * This method puts sample discounts
+     * This method puts sample discounts.
      */
     private void addDiscounts() {
         discounts.put(100001, new Discount(new Amount(0.8)));

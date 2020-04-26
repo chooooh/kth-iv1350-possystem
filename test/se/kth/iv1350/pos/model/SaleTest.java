@@ -39,10 +39,6 @@ class SaleTest {
         int expectedQuantity = 4;
         HashMap<ItemDTO, Integer> map = sale.getItemDTOMap();
         int actualQuantity = map.get(item);
-//        for(ItemDTO searchedItem : map.keySet()) {
-//            if(searchedItem.equals(item))
-//                actualQuantity = map.get(searchedItem);
-//        }
         assertTrue(actualQuantity == expectedQuantity, "quantities are not equal");
     }
 
@@ -53,4 +49,22 @@ class SaleTest {
         ItemDTO item = new ItemDTO(123, itemDescriptionDTO);
         assertFalse(sale.getItemDTOMap().get(item) != null, "The itemDTOList does not contain the test itemDTO.");
     }
+
+    @Test
+    void calculateTotal() {
+        ItemDescriptionDTO appleDescription = new ItemDescriptionDTO("Apple", new Amount(10), new Amount(1.25));
+        ItemDescriptionDTO milkDescription = new ItemDescriptionDTO("Milk", new Amount(20), new Amount(1.12));
+        ItemDescriptionDTO spinachDescription = new ItemDescriptionDTO("Spinach", new Amount(30), new Amount(1.05));
+
+        sale.addItem(new ItemDTO(1, appleDescription), 3);
+        sale.addItem(new ItemDTO(2, milkDescription), 1);
+        sale.addItem(new ItemDTO(3, spinachDescription), 1);
+
+        Amount expectedTotalPrice = new Amount((10 * 1.25)*3 + (20 * 1.12) + (30*1.05));
+        Amount actualTotalPrice = sale.calculateTotal();
+
+        assertEquals(expectedTotalPrice, actualTotalPrice, "The expected total price and the actual total price are not equal.");
+    }
+
+
 }

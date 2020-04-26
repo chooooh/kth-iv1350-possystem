@@ -9,6 +9,18 @@ public class Amount {
         this.amount = amount;
     }
 
+    /**
+     * This method adds current instance with <code>other</code> <code>Amount</code> instance.
+     * @param other
+     */
+    public void add(Amount other) {
+        this.amount += other.amount;
+    }
+
+    public Amount multiply(Amount other) {
+        return new Amount(this.amount * other.amount);
+    }
+
     @Override
     public String toString() {
         return "Amount{" +
@@ -23,5 +35,4 @@ public class Amount {
         Amount other = (Amount) o;
         return amount == other.amount;
     }
-
 }

@@ -57,8 +57,6 @@ public class Controller {
         return null;
     }
 
-
-    // OBS! SKRIV TEST!
     /**
      * This method calls all necessary operations in order to retrieve a discount.
      * @param customerID
