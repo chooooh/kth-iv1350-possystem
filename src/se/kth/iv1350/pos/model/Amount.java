@@ -1,7 +1,7 @@
 package se.kth.iv1350.pos.model;
 
 /**
- * LÄGG DENNA I UTIL?
+ * This class handles different amounts.
  */
 public class Amount {
     private double amount;
@@ -14,19 +14,28 @@ public class Amount {
     }
 
     /**
-     * This method adds current instance with <code>other</code> <code>Amount</code> instance.
-     * @param other
+     * This method adds this object with another specified objects amounts.
+     * @param other The other object to add with.
      */
     public void add(Amount other) {
         this.amount += other.amount;
     }
 
+    /**
+     * This method multiplies the amounts of this object with another specified object.
+     * @param other The other object to multiply with.
+     * @return Returns the product.
+     */
     public Amount multiply(Amount other) {
         return new Amount(this.amount * other.amount);
     }
 
+    /**
+     * This method subtracts the amounts of this object with another specified object.
+     * @param other The other object to subtract with
+     * @return Returns the subtraction.
+     */
     public Amount minus(Amount other) {
-        System.out.println(new Amount(this.amount - other.amount));
         return new Amount(this.amount - other.amount);
     }
 

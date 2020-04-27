@@ -27,8 +27,12 @@ public class View {
         controller.startSale();
         System.out.println("A new sale has been started");
 
-        controller.registerItem(1, 1);
-        controller.pay(new Amount(50));
+        String infoToDisplay;
+        System.out.println("Scanned item: " + controller.registerItem(1, 1));
+        System.out.println("Scanned item: " + controller.registerItem(1, 1));
+        System.out.println("Scanned item: " + controller.registerItem(2, 2));
+
+        controller.pay(new Amount(70));
 
     }
 }

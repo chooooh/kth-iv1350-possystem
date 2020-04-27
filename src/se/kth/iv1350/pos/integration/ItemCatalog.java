@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * This method handles the <code>ItemCatalog</code> class. It has several VAT constants.
  */
 public class ItemCatalog {
     private List<ItemDTO> itemList = new ArrayList<ItemDTO>();
@@ -22,9 +22,9 @@ public class ItemCatalog {
     }
 
     /**
-     * Check if the item list contains the specified <code>itemID</code>, if not, return false else return true
+     * Check if the item list contains the specified <code>itemID</code>.
      * @param itemID
-     * @return boolean
+     * @return Returns true if the specified itemID is found, else return false.
      */
     public boolean validateItem(int itemID) {
         for(ItemDTO item : itemList) {
@@ -38,7 +38,7 @@ public class ItemCatalog {
      * Fetches the item with corresponding <code>itemID</code>. The <code>itemQuantity</code> parameter decides the amount.
      * If the desired item isn't found, then return null.
      * @param itemID
-     * @return <ItemDTO, Integer> return a hashmap
+     * @return Return the found ItemDTO.
      */
     public ItemDTO fetchItem(int itemID) {
         for(ItemDTO item : itemList) {
@@ -48,6 +48,9 @@ public class ItemCatalog {
         return null;
     }
 
+    /**
+     * A dummy method creating sample items.
+     */
     private void addItems() {
         ItemDescriptionDTO appleDescription = new ItemDescriptionDTO("Apple", new Amount(10), VAT_TWENTY_FIVE);
         ItemDescriptionDTO milkDescription = new ItemDescriptionDTO("Milk", new Amount(20), VAT_TWELVE);

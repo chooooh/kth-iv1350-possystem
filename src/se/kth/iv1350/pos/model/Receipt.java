@@ -6,6 +6,9 @@ import se.kth.iv1350.pos.integration.ItemDescriptionDTO;
 import java.util.Date;
 import java.util.HashMap;
 
+/**
+ * Represents the receipt of a sale.
+ */
 public class Receipt {
     private Sale currentSale;
 
@@ -13,6 +16,10 @@ public class Receipt {
         this.currentSale = currentSale;
     }
 
+    /**
+     * Writes sale information on the receipt.
+     * @return Receipt information which gets displayed on the view.
+     */
     public String createReceipt() {
         StringBuilder sb = new StringBuilder();
 
@@ -38,10 +45,12 @@ public class Receipt {
             sb.append(itemDescription.getItemName());
             sb.append(" Price: ");
             sb.append(itemDescription.getItemPrice().getAmount());
+            sb.append(" kr");
             sb.append(" VAT: ");
-            sb.append(itemDescription.getItemVAT().getAmount());
+            sb.append(itemDescription.getItemVAT().minus(new Amount(1)).getAmount());
             sb.append(" Quantity: " );
             sb.append(itemMap.get(item));
+            endLine(sb);
         }
     }
 

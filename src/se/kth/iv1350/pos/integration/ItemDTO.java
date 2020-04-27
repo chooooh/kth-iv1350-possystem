@@ -3,7 +3,7 @@ package se.kth.iv1350.pos.integration;
 import java.util.Objects;
 
 /**
- * This class contains all information about item objects.
+ * This class represents items of a sale.
  */
 public class ItemDTO {
     private final int itemID;

@@ -40,7 +40,6 @@ class ItemCatalogTest {
         ItemDescriptionDTO appleDescription = new ItemDescriptionDTO("Apple", new Amount(10), new Amount(1.25));
         ItemDTO expectedItemDTO = new ItemDTO(1, appleDescription);
         ItemDTO actualItemDTO = itemCatalog.fetchItem(1);
-        assertTrue(expectedItemDTO.equals(actualItemDTO), "Items are not equal");
-//        assertEquals(expectedID, actualID, "Items are not equal.");
+        assertTrue(expectedItemDTO.equals(actualItemDTO), "The expected and actual items are not equal.");
     }
 }

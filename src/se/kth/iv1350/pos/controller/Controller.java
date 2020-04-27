@@ -49,12 +49,12 @@ public class Controller {
      * @param itemQuantity
      * @return The item retrieved when using this method.
      */
-    public ItemDTO registerItem(int itemID, int itemQuantity) {
+    public String registerItem(int itemID, int itemQuantity) {
         boolean itemIsValid = itemCatalog.validateItem(itemID);
         if(itemIsValid) {
             ItemDTO fetchedItem = itemCatalog.fetchItem(itemID);
             currentSale.addItem(fetchedItem, itemQuantity);
-            return fetchedItem;
+            return fetchedItem.getItemDescriptionDTO().toString() + ", running total: " + currentSale.getRunningTotal();
         }
         return null;
     }
@@ -71,14 +71,15 @@ public class Controller {
     }
 
     /**
-     *
-     * @param paidAmount
+     * This method handles the pay operation. The method updates the <code>CashRegister</code> and then adds a payment
+     * to the current sale.
+     * @param paidAmount The cashier writes how much the client has paid.
      */
     public void pay(Amount paidAmount) {
         CashPayment cashPayment = new CashPayment(paidAmount);
         CashRegister cashRegister = new CashRegister();
         cashRegister.addPayment(cashPayment);
-        currentSale.pay(cashPayment);
+        System.out.println(currentSale.pay(cashPayment).getAmount());
     }
 
 }

@@ -34,4 +34,40 @@ class AmountTest {
         Amount expectedAmount = new Amount(10);
         assertEquals(expectedAmount, actualAmount, "The expected and actual amount are not equal.");
     }
+
+    @Test
+    void testMinus() {
+        Amount op1 = new Amount(20);
+        Amount op2 = new Amount(10);
+        Amount expectedAmount = new Amount(10);
+        Amount actualAmount = op1.minus(op2);
+        assertEquals(expectedAmount, actualAmount, "The difference of the two operands are not correct.");
+    }
+
+    @Test
+    void testEquals() {
+        Amount firstAmount = new Amount(3);
+        Amount secondAmount = new Amount(3);
+        assertTrue(firstAmount.equals(secondAmount), "The amounts are not equal.");
+    }
+
+    @Test
+    void testNotEqualsNull() {
+        Amount amount = new Amount(0);
+        Object other = null;
+        boolean expectedBoolean = false;
+        boolean actualBoolean = amount.equals(other);
+        assertEquals(expectedBoolean, actualBoolean, "The amount instance equal to null.");
+    }
+
+    @Test
+    void testToString() {
+        double representedAmount = 20;
+        Amount amount = new Amount(representedAmount);
+        String expectedString = "Amount{" +
+                "amount=" + representedAmount +
+                '}';
+        String actualString = amount.toString();
+        assertEquals(expectedString, actualString, "The strings returned are not equal.");
+    }
 }

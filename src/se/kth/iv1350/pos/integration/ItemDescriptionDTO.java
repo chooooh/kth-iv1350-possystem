@@ -5,7 +5,7 @@ import se.kth.iv1350.pos.model.Amount;
 import java.util.Objects;
 
 /**
- * This class describes <code>ItemDTO</code> objects.
+ * This class represents the description of an item.
  */
 public class ItemDescriptionDTO {
     private String itemName;

@@ -17,7 +17,6 @@ public class Sale {
     private SaleInformation saleInformation;
     private Amount runningTotal;
     private HashMap<ItemDTO, Integer> itemMap = new HashMap<ItemDTO, Integer>();
-    private CashPayment paidAmount;
 
     /**
      * Creates a new instance and saves the time of the sale.
@@ -62,7 +61,7 @@ public class Sale {
      * If there is a duplicate of the specified item in the item, update quantity.
      * @param itemDTO
      * @param itemQuantity
-     * @return Returns string to display in view.
+     * @return String to display on the view.
      */
     public String addItem(ItemDTO itemDTO, int itemQuantity) {
         if(itemMapContains(itemDTO))
@@ -94,10 +93,9 @@ public class Sale {
     public Amount pay(CashPayment payment) {
         payment.getTotalCost(this);
         Receipt receipt = new Receipt(this);
+        new ExternalAccountingSystem().updateInformation(this);
+        new ExternalInventorySystem().updateInformation(this);
         System.out.println(receipt.createReceipt());
-
-        new ExternalAccountingSystem().updateInformation();
-        new ExternalInventorySystem().updateInformation();
         return payment.getChange();
     }
 }

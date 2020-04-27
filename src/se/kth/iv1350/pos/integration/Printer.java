@@ -7,11 +7,4 @@ import se.kth.iv1350.pos.model.Receipt;
  */
 public class Printer {
     private Receipt receipt;
-//    public Printer(Receipt receipt) {
-//        this.receipt = receipt;
-//    }
-//
-//    public void PrintReceipt() {
-//
-//    }
 }

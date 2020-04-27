@@ -1,6 +1,7 @@
 package se.kth.iv1350.pos.integration;
 
 /**
+ * This class is responsible for calling the two related classes, <code>ItemCatalog</code> and <code>DiscountCatalog</code>.
  *
  */
 public class CatalogCreator {
