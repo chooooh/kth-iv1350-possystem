@@ -2,9 +2,7 @@ package se.kth.iv1350.pos.integration;
 
 import se.kth.iv1350.pos.model.Amount;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class DiscountCatalog {
     private HashMap<Integer, Discount> discounts = new HashMap<Integer, Discount>();

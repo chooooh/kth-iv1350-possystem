@@ -4,13 +4,14 @@ import se.kth.iv1350.pos.integration.ItemDTO;
 import se.kth.iv1350.pos.integration.ItemDescriptionDTO;
 
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
  * This class sale has sale related operations and attributes.
  */
 public class Sale {
-    private LocalTime time;
+    private Date date;
     private SaleInformation saleInformation;
     private Amount runningTotal;
     private HashMap<ItemDTO, Integer> itemMap = new HashMap<ItemDTO, Integer>();
@@ -19,7 +20,7 @@ public class Sale {
      * Creates a new instance and saves the time of the sale.
      */
     public Sale() {
-        time = LocalTime.now();
+        date = new Date(); // date.toString();
         saleInformation = new SaleInformation();
     }
 

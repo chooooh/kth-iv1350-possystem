@@ -21,6 +21,10 @@ public class Amount {
         return new Amount(this.amount * other.amount);
     }
 
+    public Amount minus(Amount other) {
+        return new Amount(this.amount - other.amount);
+    }
+
     @Override
     public String toString() {
         return "Amount{" +
