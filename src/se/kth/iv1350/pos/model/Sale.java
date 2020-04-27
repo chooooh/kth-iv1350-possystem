@@ -1,5 +1,7 @@
 package se.kth.iv1350.pos.model;
 
+import se.kth.iv1350.pos.integration.ExternalAccountingSystem;
+import se.kth.iv1350.pos.integration.ExternalInventorySystem;
 import se.kth.iv1350.pos.integration.ItemDTO;
 import se.kth.iv1350.pos.integration.ItemDescriptionDTO;
 
@@ -15,6 +17,7 @@ public class Sale {
     private SaleInformation saleInformation;
     private Amount runningTotal;
     private HashMap<ItemDTO, Integer> itemMap = new HashMap<ItemDTO, Integer>();
+    private CashPayment paidAmount;
 
     /**
      * Creates a new instance and saves the time of the sale.
@@ -22,10 +25,15 @@ public class Sale {
     public Sale() {
         date = new Date(); // date.toString();
         saleInformation = new SaleInformation();
+        runningTotal = new Amount(0);
     }
 
-    public HashMap getItemDTOMap() {
+    public HashMap<ItemDTO, Integer> getItemDTOMap() {
         return itemMap;
+    }
+
+    public Amount getRunningTotal() {
+        return runningTotal;
     }
 
     /**
@@ -61,8 +69,13 @@ public class Sale {
             updateQuantity(itemDTO, itemQuantity);
         else
             itemMap.put(itemDTO, itemQuantity);
+        addItemPriceToRunningTotal(applyVAT(itemDTO), itemQuantity);
         String infoToDisplay = itemDTO.getItemDescriptionDTO().toString();
         return infoToDisplay;
+    }
+
+    private void addItemPriceToRunningTotal(Amount itemPrice, int itemQuantity) {
+        runningTotal.add(itemPrice.multiply(new Amount(itemQuantity)));
     }
 
     private boolean itemMapContains(ItemDTO itemDTO) {
@@ -71,5 +84,20 @@ public class Sale {
 
     private void updateQuantity(ItemDTO itemDTO, int itemQuantity) {
         itemMap.put(itemDTO, itemMap.get(itemDTO) + itemQuantity);
+    }
+
+    /**
+     * This method handles the pay operation.
+     * @param payment
+     * @return
+     */
+    public Amount pay(CashPayment payment) {
+        payment.getTotalCost(this);
+        Receipt receipt = new Receipt(this);
+        System.out.println(receipt.createReceipt());
+
+        new ExternalAccountingSystem().updateInformation();
+        new ExternalInventorySystem().updateInformation();
+        return payment.getChange();
     }
 }

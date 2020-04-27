@@ -9,6 +9,10 @@ public class Amount {
         this.amount = amount;
     }
 
+    public double getAmount() {
+        return amount;
+    }
+
     /**
      * This method adds current instance with <code>other</code> <code>Amount</code> instance.
      * @param other
@@ -22,6 +26,7 @@ public class Amount {
     }
 
     public Amount minus(Amount other) {
+        System.out.println(new Amount(this.amount - other.amount));
         return new Amount(this.amount - other.amount);
     }
 

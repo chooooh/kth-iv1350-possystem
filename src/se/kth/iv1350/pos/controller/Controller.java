@@ -1,6 +1,8 @@
 package se.kth.iv1350.pos.controller;
 
 import se.kth.iv1350.pos.integration.*;
+import se.kth.iv1350.pos.model.Amount;
+import se.kth.iv1350.pos.model.CashPayment;
 import se.kth.iv1350.pos.model.CashRegister;
 import se.kth.iv1350.pos.model.Sale;
 
@@ -68,5 +70,15 @@ public class Controller {
         return infoToDisplay;
     }
 
+    /**
+     *
+     * @param paidAmount
+     */
+    public void pay(Amount paidAmount) {
+        CashPayment cashPayment = new CashPayment(paidAmount);
+        CashRegister cashRegister = new CashRegister();
+        cashRegister.addPayment(cashPayment);
+        currentSale.pay(cashPayment);
+    }
 
 }

@@ -19,7 +19,6 @@ public class Main {
         CatalogCreator catalogCreator = new CatalogCreator();
         ExternalSystemCreator systemCreator = new ExternalSystemCreator();
         Printer printer = new Printer();
-
         Controller controller = new Controller(catalogCreator, systemCreator, printer);
         View view = new View(controller);
         view.sampleExecution();

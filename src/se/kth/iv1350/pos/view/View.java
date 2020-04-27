@@ -1,6 +1,8 @@
 package se.kth.iv1350.pos.view;
 
 import se.kth.iv1350.pos.controller.Controller;
+import se.kth.iv1350.pos.integration.ItemDTO;
+import se.kth.iv1350.pos.model.Amount;
 
 /**
  * This is a placeholder for the real view. The class method <code>sampleExecution</code> contains hardcoded executioner
@@ -24,5 +26,9 @@ public class View {
     public void sampleExecution() {
         controller.startSale();
         System.out.println("A new sale has been started");
+
+        controller.registerItem(1, 1);
+        controller.pay(new Amount(50));
+
     }
 }

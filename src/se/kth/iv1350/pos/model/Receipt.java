@@ -1,14 +1,57 @@
 package se.kth.iv1350.pos.model;
 
+import se.kth.iv1350.pos.integration.ItemDTO;
+import se.kth.iv1350.pos.integration.ItemDescriptionDTO;
+
 import java.util.Date;
+import java.util.HashMap;
 
 public class Receipt {
-    private Date date;
-    private SaleInformation saleInformation;
+    private Sale currentSale;
 
-    public Receipt(Date date, SaleInformation saleInformation) {
-        this.date = date;
-        this.saleInformation = saleInformation;
+    public Receipt(Sale currentSale) {
+        this.currentSale = currentSale;
+    }
+
+    public String createReceipt() {
+        StringBuilder sb = new StringBuilder();
+
+        appendLine(sb, new Date().toString());
+        endLine(sb);
+
+        appendAllItems(sb);
+        sb.append("\n");
+        endLine(sb);
+
+        sb.append("Total:");
+        sb.append(currentSale.getRunningTotal().getAmount());
+        endLine(sb);
+
+        return sb.toString();
+    }
+
+    private void appendAllItems(StringBuilder sb) {
+        HashMap<ItemDTO, Integer> itemMap = currentSale.getItemDTOMap();
+        for(ItemDTO item : itemMap.keySet()) {
+            ItemDescriptionDTO itemDescription = item.getItemDescriptionDTO();
+            sb.append("Item: ");
+            sb.append(itemDescription.getItemName());
+            sb.append(" Price: ");
+            sb.append(itemDescription.getItemPrice().getAmount());
+            sb.append(" VAT: ");
+            sb.append(itemDescription.getItemVAT().getAmount());
+            sb.append(" Quantity: " );
+            sb.append(itemMap.get(item));
+        }
+    }
+
+    private void appendLine(StringBuilder sb, String line) {
+        sb.append(line);
+        sb.append("\n");
+    }
+
+    private void endLine(StringBuilder sb) {
+        sb.append("\n");
     }
 
 }
