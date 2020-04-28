@@ -30,7 +30,7 @@ public class Receipt {
         sb.append("\n");
         endLine(sb);
 
-        sb.append("Total:");
+        sb.append("Total: ");
         sb.append(currentSale.getRunningTotal().getAmount());
         endLine(sb);
 

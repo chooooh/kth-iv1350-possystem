@@ -5,15 +5,12 @@ import se.kth.iv1350.pos.integration.ExternalInventorySystem;
 import se.kth.iv1350.pos.integration.ItemDTO;
 import se.kth.iv1350.pos.integration.ItemDescriptionDTO;
 
-import java.time.LocalTime;
-import java.util.Date;
 import java.util.HashMap;
 
 /**
  * This class sale has sale related operations and attributes.
  */
 public class Sale {
-    private Date date;
     private SaleInformation saleInformation;
     private Amount runningTotal;
     private HashMap<ItemDTO, Integer> itemMap = new HashMap<ItemDTO, Integer>();
@@ -22,7 +19,6 @@ public class Sale {
      * Creates a new instance and saves the time of the sale.
      */
     public Sale() {
-        date = new Date(); // date.toString();
         saleInformation = new SaleInformation();
         runningTotal = new Amount(0);
     }

@@ -79,7 +79,7 @@ public class Controller {
         CashPayment cashPayment = new CashPayment(paidAmount);
         CashRegister cashRegister = new CashRegister();
         cashRegister.addPayment(cashPayment);
-        System.out.println(currentSale.pay(cashPayment).getAmount());
+        currentSale.pay(cashPayment).getAmount();
     }
 
 }
