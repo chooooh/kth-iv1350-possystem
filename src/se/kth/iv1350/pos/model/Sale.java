@@ -11,24 +11,32 @@ import java.util.HashMap;
  * This class sale has sale related operations and attributes.
  */
 public class Sale {
-    private SaleInformation saleInformation;
     private Amount runningTotal;
     private HashMap<ItemDTO, Integer> itemMap = new HashMap<ItemDTO, Integer>();
+    private RetailStore retailStore;
+    private CashPayment payment;
 
     /**
      * Creates a new instance and saves the time of the sale.
      */
     public Sale() {
-        saleInformation = new SaleInformation();
         runningTotal = new Amount(0);
     }
 
-    public HashMap<ItemDTO, Integer> getItemDTOMap() {
+    HashMap<ItemDTO, Integer> getItemDTOMap() {
         return itemMap;
+    }
+
+    RetailStore getRetailStore() {
+        return retailStore;
     }
 
     public Amount getRunningTotal() {
         return runningTotal;
+    }
+
+    public CashPayment getPayment() {
+        return payment;
     }
 
     /**
@@ -87,11 +95,16 @@ public class Sale {
      * @return
      */
     public Amount pay(CashPayment payment) {
-        payment.getTotalCost(this);
+        this.payment = payment;
+        payment.getTotalPrice(this);
         Receipt receipt = new Receipt(this);
         new ExternalAccountingSystem().updateInformation(this);
         new ExternalInventorySystem().updateInformation(this);
         System.out.println(receipt.createReceipt());
         return payment.getChange();
+    }
+
+    public void setStoreInfo(RetailStore retailStore) {
+        this.retailStore = retailStore;
     }
 }

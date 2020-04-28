@@ -13,6 +13,10 @@ public class CashRegister {
         balance = new Amount(0);
     }
 
+    Amount getBalance() {
+        return balance;
+    }
+
     /**
      * Updates the balance with the {@link Amount} in the {@link CashPayment}.
      * @param payment

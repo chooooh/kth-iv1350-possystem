@@ -3,8 +3,8 @@ package se.kth.iv1350.pos.model;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import se.kth.iv1350.pos.integration.ItemDTO;
-import se.kth.iv1350.pos.integration.ItemDescriptionDTO;
+import se.kth.iv1350.pos.controller.Controller;
+import se.kth.iv1350.pos.integration.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -35,10 +35,13 @@ class ReceiptTest {
 
     @Test
     void createReceipt() {
-        Sale sale = new Sale();
-        ItemDescriptionDTO appleDescription = new ItemDescriptionDTO("Apple", new Amount(10), new Amount(1.25));
-        ItemDTO apple = new ItemDTO(1, appleDescription);
-        sale.addItem(apple, 1);
-        fail("finish this test");
+        Controller controller = new Controller(new CatalogCreator(), new ExternalSystemCreator(), new Printer());
+        controller.startSale();
+        controller.setStoreInfo(new RetailStore("IKA", "Stenvägen 123"));
+        controller.registerItem(1, 1);
+        controller.pay(new Amount(50));
+        String printout = printoutBuffer.toString();
+        String someOfTheExpectedString = "Item: Apple Price: 10.0 kr VAT: 0.25 Quantity: 1";
+        assertTrue(printout.contains(someOfTheExpectedString), "The receipt does not contain the expected string.");
     }
 }

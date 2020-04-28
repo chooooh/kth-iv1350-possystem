@@ -22,6 +22,16 @@ public class Receipt {
      */
     public String createReceipt() {
         StringBuilder sb = new StringBuilder();
+        endLine(sb);
+
+        sb.append("Store: ");
+        RetailStore store = currentSale.getRetailStore();
+        if(store != null) {
+            sb.append(store.getStoreName());
+            sb.append(", ");
+            sb.append(currentSale.getRetailStore().getStoreAddress());
+            endLine(sb);
+        }
 
         appendLine(sb, new Date().toString());
         endLine(sb);
@@ -32,6 +42,7 @@ public class Receipt {
 
         sb.append("Total: ");
         sb.append(currentSale.getRunningTotal().getAmount());
+        sb.append(" kr");
         endLine(sb);
 
         return sb.toString();

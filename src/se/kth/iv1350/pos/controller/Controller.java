@@ -1,10 +1,7 @@
 package se.kth.iv1350.pos.controller;
 
 import se.kth.iv1350.pos.integration.*;
-import se.kth.iv1350.pos.model.Amount;
-import se.kth.iv1350.pos.model.CashPayment;
-import se.kth.iv1350.pos.model.CashRegister;
-import se.kth.iv1350.pos.model.Sale;
+import se.kth.iv1350.pos.model.*;
 
 
 /**
@@ -41,6 +38,10 @@ public class Controller {
         currentSale = new Sale();
     }
 
+    public void setStoreInfo(RetailStore retailStore) {
+        currentSale.setStoreInfo(retailStore);
+    }
+
 
     /**
      * This method checks if the specified itemID is valid, if it is valid, return the matching item. Else, return null.
@@ -74,12 +75,13 @@ public class Controller {
      * This method handles the pay operation. The method updates the <code>CashRegister</code> and then adds a payment
      * to the current sale.
      * @param paidAmount The cashier writes how much the client has paid.
+     * @Return This method returns the amount of change, which is displayed on the view.
      */
-    public void pay(Amount paidAmount) {
+    public String pay(Amount paidAmount) {
         CashPayment cashPayment = new CashPayment(paidAmount);
         CashRegister cashRegister = new CashRegister();
         cashRegister.addPayment(cashPayment);
-        currentSale.pay(cashPayment).getAmount();
+        return String.valueOf(currentSale.pay(cashPayment).getAmount());
     }
 
 }

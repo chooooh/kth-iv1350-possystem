@@ -17,7 +17,7 @@ public class ExternalAccountingSystem {
      * Dummy method simulating an update of information
      */
     public void updateInformation(Sale sale) {
-        System.out.println("Updating information..");
+        System.out.println("Updating information external accounting system..");
         sales.add(sale);
     }
 }

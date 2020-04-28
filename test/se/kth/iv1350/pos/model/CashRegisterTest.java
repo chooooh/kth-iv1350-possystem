@@ -21,6 +21,10 @@ class CashRegisterTest {
 
     @Test
     void addPayment() {
-        fail("finish this test");
+        CashPayment payment = new CashPayment(new Amount(50));
+        cashRegister.addPayment(payment);
+        Amount expectedBalance = new Amount(50);
+        Amount actualBalance = cashRegister.getBalance();
+        assertEquals(expectedBalance, actualBalance, "Balances are equal.");
     }
 }

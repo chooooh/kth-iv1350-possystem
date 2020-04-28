@@ -17,7 +17,7 @@ public class ExternalInventorySystem {
      * Dummy method simulating an update of information
      */
     public void updateInformation(Sale sale) {
-        System.out.println("Updating information..");
+        System.out.println("Updating information external inventory system..");
         sales.add(sale);
     }
 }

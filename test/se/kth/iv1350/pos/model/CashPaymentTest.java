@@ -1,10 +1,8 @@
 package se.kth.iv1350.pos.model;
 
-import com.sun.org.apache.xml.internal.resolver.Catalog;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import se.kth.iv1350.pos.controller.Controller;
 import se.kth.iv1350.pos.integration.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,19 +22,15 @@ class CashPaymentTest {
 
     @Test
     void getTotalCost() {
-//        Sale sale = new Sale();
-//        ItemDescriptionDTO appleDescription = new ItemDescriptionDTO("Apple", new Amount(10), VAT_TWENTY_FIVE);
-//        ItemDTO itemDTO = new ItemDTO(1, appleDescription);
-//        sale.addItem(itemDTO, 2);
-//        sale.pay(cashPayment);
-//        Amount expectedAmount = new Amount(50).minus(itemDTO.getItemDescriptionDTO().getItemPrice());
-//        cashPayment.getTotalCost(sale);
-
-//        Controller controller = new Controller(new CatalogCreator(), new ExternalSystemCreator(), new Printer());
-//        controller.startSale();
-//        controller.registerItem(1, 1);
-//        controller.pay(new Amount(50));
-        fail("finish this test");
+        Sale sale = new Sale();
+        ItemDescriptionDTO appleDescription = new ItemDescriptionDTO("Apple", new Amount(10), new Amount(1.25));
+        ItemDTO itemDTO = new ItemDTO(1, appleDescription);
+        sale.addItem(itemDTO, 2);
+        sale.pay(cashPayment);
+        cashPayment.getTotalPrice(sale);
+        Amount actualTotalCost = cashPayment.getTotalCost();
+        Amount expectedTotalCost = new Amount(10*1.25*2);
+        assertEquals(expectedTotalCost, actualTotalCost, "The costs are not equal.");
     }
 
     @Test
@@ -45,7 +39,7 @@ class CashPaymentTest {
         ItemDescriptionDTO appleDescription = new ItemDescriptionDTO("Apple", new Amount(10), new Amount(1.25));
         ItemDTO apple = new ItemDTO(1, appleDescription);
         sale.addItem(apple, 1);
-        cashPayment.getTotalCost(sale);
+        cashPayment.getTotalPrice(sale);
         Amount expectedChange = new Amount(50 - 12.5);
         Amount actualChange = cashPayment.getChange();
         assertEquals(expectedChange, actualChange, "The changes are equal.");
@@ -57,7 +51,7 @@ class CashPaymentTest {
         ItemDescriptionDTO appleDescription = new ItemDescriptionDTO("Apple", new Amount(10), new Amount(1.25));
         ItemDTO apple = new ItemDTO(1, appleDescription);
         sale.addItem(apple, 1);
-        cashPayment.getTotalCost(sale);
+        cashPayment.getTotalPrice(sale);
         Amount expectedChange = new Amount(50 - 1000);
         Amount actualChange = cashPayment.getChange();
         assertFalse(expectedChange.equals(actualChange));

@@ -3,8 +3,8 @@ package se.kth.iv1350.pos.model;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import se.kth.iv1350.pos.integration.ItemDTO;
-import se.kth.iv1350.pos.integration.ItemDescriptionDTO;
+import se.kth.iv1350.pos.controller.Controller;
+import se.kth.iv1350.pos.integration.*;
 
 import java.util.HashMap;
 
@@ -51,7 +51,7 @@ class SaleTest {
     }
 
     @Test
-    void calculateTotal() {
+    void TestCalculateTotal() {
         ItemDescriptionDTO appleDescription = new ItemDescriptionDTO("Apple", new Amount(10), new Amount(1.25));
         ItemDescriptionDTO milkDescription = new ItemDescriptionDTO("Milk", new Amount(20), new Amount(1.12));
         ItemDescriptionDTO spinachDescription = new ItemDescriptionDTO("Spinach", new Amount(30), new Amount(1.05));
@@ -65,6 +65,19 @@ class SaleTest {
 
         assertEquals(expectedTotalPrice, actualTotalPrice, "The expected total price and the actual total price are not equal.");
     }
+
+    @Test
+    void Pay() {
+        Controller controller = new Controller(new CatalogCreator(), new ExternalSystemCreator(), new Printer());
+        controller.startSale();
+        controller.setStoreInfo(new RetailStore("IKA", "Stenvägen 123"));
+        controller.registerItem(1,1);
+        CashPayment payment = new CashPayment(new Amount(50));
+        String actualChange = controller.pay(payment.getPaidAmount());
+        String expectedChange = String.valueOf(50-12.5);
+        assertEquals(expectedChange, actualChange, "The amounts are not equal.");
+    }
+
 
 
 }

@@ -15,11 +15,15 @@ public class CashPayment {
         return paidAmount;
     }
 
+    public Amount getTotalCost() {
+        return totalCost;
+    }
+
     /**
      * Gets the total cost by calling the method calculateTotal from {@link Sale}.
      * @param sale
      */
-    void getTotalCost(Sale sale) {
+    void getTotalPrice(Sale sale) {
         totalCost = sale.calculateTotal();
     }
 

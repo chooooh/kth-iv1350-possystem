@@ -3,6 +3,7 @@ package se.kth.iv1350.pos.view;
 import se.kth.iv1350.pos.controller.Controller;
 import se.kth.iv1350.pos.integration.ItemDTO;
 import se.kth.iv1350.pos.model.Amount;
+import se.kth.iv1350.pos.model.RetailStore;
 
 /**
  * This is a placeholder for the real view. The class method <code>sampleExecution</code> contains hardcoded executioner
@@ -25,14 +26,27 @@ public class View {
      */
     public void sampleExecution() {
         controller.startSale();
+        controller.setStoreInfo(new RetailStore("IKA", "Stenvägen 123"));
+
         System.out.println("A new sale has been started");
 
-        String infoToDisplay;
         System.out.println("Scanned item: " + controller.registerItem(1, 1));
         System.out.println("Scanned item: " + controller.registerItem(1, 1));
         System.out.println("Scanned item: " + controller.registerItem(2, 2));
 
-        controller.pay(new Amount(70));
+        System.out.println("Change: " + controller.pay(new Amount(70)) + " kr");
 
+        controller.startSale();
+        controller.setStoreInfo(new RetailStore("IKA", "Stenvägen 123"));
+        System.out.println("\n\n");
+
+
+        System.out.println("A new sale has been started");
+
+        System.out.println("Scanned item: " + controller.registerItem(1, 1));
+        System.out.println("Scanned item: " + controller.registerItem(1, 1));
+        System.out.println("Scanned item: " + controller.registerItem(2, 2));
+
+        System.out.println("Change: " + controller.pay(new Amount(70)) + " kr");
     }
 }
