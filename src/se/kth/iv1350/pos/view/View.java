@@ -35,18 +35,5 @@ public class View {
         System.out.println("Scanned item: " + controller.registerItem(2, 2));
 
         System.out.println("Change: " + controller.pay(new Amount(70)) + " kr");
-
-        controller.startSale();
-        controller.setStoreInfo(new RetailStore("IKA", "Stenvägen 123"));
-        System.out.println("\n\n");
-
-
-        System.out.println("A new sale has been started");
-
-        System.out.println("Scanned item: " + controller.registerItem(1, 1));
-        System.out.println("Scanned item: " + controller.registerItem(1, 1));
-        System.out.println("Scanned item: " + controller.registerItem(2, 2));
-
-        System.out.println("Change: " + controller.pay(new Amount(70)) + " kr");
     }
 }
