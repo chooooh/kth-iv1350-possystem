@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import se.kth.iv1350.pos.integration.CatalogCreator;
 import se.kth.iv1350.pos.integration.ExternalSystemCreator;
+import se.kth.iv1350.pos.integration.InvalidItemIDException;
 import se.kth.iv1350.pos.integration.Printer;
 import se.kth.iv1350.pos.model.Amount;
 
@@ -40,8 +41,12 @@ class ControllerTest {
     @Test
     void TestItemPriceRegisterItem() {
         instanceToTest.startSale();
-        System.out.println(instanceToTest.registerItem(1,2));
-        System.out.println(instanceToTest.registerItem(1,1));
+        try {
+            System.out.println(instanceToTest.registerItem(1,2));
+            System.out.println(instanceToTest.registerItem(1,1));
+        } catch (InvalidItemIDException e) {
+            e.printStackTrace();
+        }
 
         Amount expectedPrice = new Amount((10*1.25)*3); // (10kr * 0.25% vat) * 3 st
         String printout = printoutBuffer.toString();
@@ -51,8 +56,12 @@ class ControllerTest {
     @Test
     void TestItemNameRegisterItem() {
         instanceToTest.startSale();
-        System.out.println(instanceToTest.registerItem(1,2));
-        System.out.println(instanceToTest.registerItem(2,2));
+        try {
+            System.out.println(instanceToTest.registerItem(1,2));
+            System.out.println(instanceToTest.registerItem(2,2));
+        } catch (InvalidItemIDException e) {
+            e.printStackTrace();
+        }
 
         String expectedItemName = "Apple";
         String printout = printoutBuffer.toString();

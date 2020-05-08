@@ -71,7 +71,11 @@ class SaleTest {
         Controller controller = new Controller(new CatalogCreator(), new ExternalSystemCreator(), new Printer());
         controller.startSale();
         controller.setStoreInfo(new RetailStore("IKA", "Stenvägen 123"));
-        controller.registerItem(1,1);
+        try {
+            controller.registerItem(1,1);
+        } catch (InvalidItemIDException e) {
+            e.printStackTrace();
+        }
         CashPayment payment = new CashPayment(new Amount(50));
         String actualChange = controller.pay(payment.getPaidAmount());
         String expectedChange = String.valueOf(50-12.5);

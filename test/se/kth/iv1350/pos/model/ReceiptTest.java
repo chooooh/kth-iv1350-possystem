@@ -38,7 +38,11 @@ class ReceiptTest {
         Controller controller = new Controller(new CatalogCreator(), new ExternalSystemCreator(), new Printer());
         controller.startSale();
         controller.setStoreInfo(new RetailStore("IKA", "Stenvägen 123"));
-        controller.registerItem(1, 1);
+        try {
+            controller.registerItem(1, 1);
+        } catch (InvalidItemIDException e) {
+            e.printStackTrace();
+        }
         controller.pay(new Amount(50));
         String printout = printoutBuffer.toString();
         String someOfTheExpectedString = "Item: Apple Price: 10.0 kr VAT: 0.25 Quantity: 1";

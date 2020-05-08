@@ -7,6 +7,7 @@ import se.kth.iv1350.pos.controller.Controller;
 import se.kth.iv1350.pos.integration.*;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -23,7 +24,11 @@ class ViewTest {
         Printer printer = new Printer();
         Controller controller = new Controller(catalogCreator, systemCreator, printer);
 
-        instanceToTest = new View(controller);
+        try {
+            instanceToTest = new View(controller);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         printoutBuffer = new ByteArrayOutputStream();
         PrintStream inMemSysOut = new PrintStream(printoutBuffer);

@@ -40,12 +40,12 @@ public class ItemCatalog {
      * @param itemID
      * @return Return the found ItemDTO.
      */
-    public ItemDTO fetchItem(int itemID) {
+    public ItemDTO fetchItem(int itemID) throws InvalidItemIDException {
         for(ItemDTO item : itemList) {
             if(item.getItemID() == itemID)
                 return item;
         }
-        return null;
+        throw new InvalidItemIDException(itemID);
     }
 
     /**

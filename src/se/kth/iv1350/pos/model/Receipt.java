@@ -24,6 +24,9 @@ public class Receipt {
         StringBuilder sb = new StringBuilder();
         endLine(sb);
 
+        sb.append("-----------------------------------");
+        endLine(sb);
+
         sb.append("Store: ");
         RetailStore store = currentSale.getRetailStore();
         if(store != null) {
@@ -44,6 +47,10 @@ public class Receipt {
         sb.append(currentSale.getRunningTotal().getAmount());
         sb.append(" kr");
         endLine(sb);
+
+        sb.append("-----------------------------------");
+        endLine(sb);
+
 
         return sb.toString();
     }

@@ -50,14 +50,15 @@ public class Controller {
      * @param itemQuantity
      * @return The item retrieved when using this method.
      */
-    public String registerItem(int itemID, int itemQuantity) {
+    public String registerItem(int itemID, int itemQuantity) throws InvalidItemIDException {
         boolean itemIsValid = itemCatalog.validateItem(itemID);
         if(itemIsValid) {
             ItemDTO fetchedItem = itemCatalog.fetchItem(itemID);
             currentSale.addItem(fetchedItem, itemQuantity);
             return fetchedItem.getItemDescriptionDTO().toString() + ", running total: " + currentSale.getRunningTotal();
-        }
-        return null;
+        } else
+            // Kasta operationfailedexception istället?
+            throw new InvalidItemIDException(itemID);
     }
 
     /**
