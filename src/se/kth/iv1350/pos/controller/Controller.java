@@ -3,6 +3,9 @@ package se.kth.iv1350.pos.controller;
 import se.kth.iv1350.pos.integration.*;
 import se.kth.iv1350.pos.model.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * This is the applications controller. Almost all calls to the model and integration pass through here.
@@ -10,11 +13,8 @@ import se.kth.iv1350.pos.model.*;
 public class Controller {
     private ItemCatalog itemCatalog;
     private DiscountCatalog discountCatalog;
-    private ExternalInventorySystem inventorySystem;
-    private ExternalAccountingSystem accountingSystem;
-    private Printer printer;
-    private CashRegister cashRegister;
     private Sale currentSale;
+    private List<SaleObserver> saleObservers = new ArrayList<>();
 
     /**
      * Creates new instance, which
@@ -25,10 +25,6 @@ public class Controller {
     public Controller(CatalogCreator catalogCreator, ExternalSystemCreator systemCreator, Printer printer) {
         this.itemCatalog = catalogCreator.getItemCatalog();
         this.discountCatalog = catalogCreator.getDiscountCatalog();
-        this.inventorySystem = systemCreator.getInventorySystem();
-        this.accountingSystem = systemCreator.getAccountingSystem();
-        this.printer = printer;
-        this.cashRegister = new CashRegister();
     }
 
     /**
@@ -49,6 +45,7 @@ public class Controller {
      * @param itemID
      * @param itemQuantity
      * @return The item retrieved when using this method.
+     * @throws InvalidItemIDException if the specified item id does not exist
      */
     public String registerItem(int itemID, int itemQuantity) throws InvalidItemIDException {
         boolean itemIsValid = itemCatalog.validateItem(itemID);
@@ -57,7 +54,6 @@ public class Controller {
             currentSale.addItem(fetchedItem, itemQuantity);
             return fetchedItem.getItemDescriptionDTO().toString() + ", running total: " + currentSale.getRunningTotal();
         } else
-            // Kasta operationfailedexception istället?
             throw new InvalidItemIDException(itemID);
     }
 
@@ -82,7 +78,16 @@ public class Controller {
         CashPayment cashPayment = new CashPayment(paidAmount);
         CashRegister cashRegister = new CashRegister();
         cashRegister.addPayment(cashPayment);
+        currentSale.addSaleObservers(saleObservers);
         return String.valueOf(currentSale.pay(cashPayment).getAmount());
+    }
+
+    /**
+     * The specified observer will be notified when a sale has been completed.
+     * @param observer The observer to notify.
+     */
+    public void addSaleObserver(SaleObserver observer) {
+        saleObservers.add(observer);
     }
 
 }

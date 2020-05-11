@@ -44,7 +44,32 @@ class ItemCatalogTest {
             actualItemDTO = itemCatalog.fetchItem(1);
         } catch (InvalidItemIDException e) {
             e.printStackTrace();
+            fail("failed to fetch item");
         }
         assertTrue(expectedItemDTO.equals(actualItemDTO), "The expected and actual items are not equal.");
     }
+
+    @Test
+    void ExceptionInvalidItemFetchItem() {
+        try {
+            itemCatalog.fetchItem(9999);
+            fail("Managed to fetch item.");
+        } catch (InvalidItemIDException e) {
+            assertTrue(e.getMessage().contains("Specified itemID does not exist: 9999"));
+        }
+    }
+
+    @Test
+    void ExceptionDatabaseFetchItem() {
+        try {
+            itemCatalog.fetchItem(-5);
+            fail("Managed to fetch item.");
+        } catch (ItemCatalogException e) {
+            assertTrue(e.getMessage().contains("Could not connect to the database."));
+        } catch (InvalidItemIDException e) {
+            fail("Wrong exception message.");
+        }
+    }
+
+
 }

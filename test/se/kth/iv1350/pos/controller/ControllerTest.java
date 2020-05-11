@@ -13,6 +13,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class ControllerTest {
     private Controller instanceToTest;
@@ -45,6 +46,7 @@ class ControllerTest {
             System.out.println(instanceToTest.registerItem(1,2));
             System.out.println(instanceToTest.registerItem(1,1));
         } catch (InvalidItemIDException e) {
+            fail("Failed to register an item");
             e.printStackTrace();
         }
 
@@ -60,6 +62,7 @@ class ControllerTest {
             System.out.println(instanceToTest.registerItem(1,2));
             System.out.println(instanceToTest.registerItem(2,2));
         } catch (InvalidItemIDException e) {
+            fail("Failed to register an item");
             e.printStackTrace();
         }
 
@@ -68,4 +71,14 @@ class ControllerTest {
         assertTrue(printout.contains(expectedItemName), "The string does not contain correct item price.");
     }
 
+    @Test
+    void TestExceptionRegisterItem() {
+        instanceToTest.startSale();
+        try {
+            System.out.println(instanceToTest.registerItem(9999,2));
+            fail("Managed to register invalid items");
+        } catch (InvalidItemIDException e) {
+            assertTrue(e.getMessage().contains("Specified itemID does not exist: 9999"), "Wrong exception message");
+        }
+    }
 }

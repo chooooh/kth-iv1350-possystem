@@ -5,7 +5,9 @@ import se.kth.iv1350.pos.integration.ExternalInventorySystem;
 import se.kth.iv1350.pos.integration.ItemDTO;
 import se.kth.iv1350.pos.integration.ItemDescriptionDTO;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * This class sale has sale related operations and attributes.
@@ -15,7 +17,26 @@ public class Sale {
     private HashMap<ItemDTO, Integer> itemMap = new HashMap<ItemDTO, Integer>();
     private RetailStore retailStore;
     private CashPayment payment;
+    private List<SaleObserver> saleObservers = new ArrayList<>();
 
+    /**
+     * Registers observer to the saleObservers list. Any observer in the list will get notified when this object changes
+     * state.
+     * @param observer The observer that shall be requested.
+     */
+    public void addSaleObserver(SaleObserver observer) {
+        saleObservers.add(observer);
+    }
+
+    public void addSaleObservers(List<SaleObserver> observers) {
+        saleObservers.addAll(observers);
+    }
+
+    private void notifyObservers() {
+        for(SaleObserver observer : saleObservers) {
+            observer.newSale(payment);
+        }
+    }
     /**
      * Creates a new instance and saves the time of the sale.
      */
@@ -101,6 +122,7 @@ public class Sale {
         new ExternalAccountingSystem().updateInformation(this);
         new ExternalInventorySystem().updateInformation(this);
         System.out.println(receipt.createReceipt());
+        notifyObservers();
         return payment.getChange();
     }
 

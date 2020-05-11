@@ -14,8 +14,19 @@ public class ItemCatalog {
     private final Amount VAT_TWELVE = new Amount(1.12);
     private final Amount VAT_FIVE = new Amount(1.05);
 
+//    /**
+//     * Just a method used to simulate database failure
+//     * @return The itemlist containng all items.
+//     * @throws ItemCatalogException if the database fails.
+//     */
+//    public List<ItemDTO> getItemList() throws ItemCatalogException{
+//        if(itemList == null)
+//            throw new ItemCatalogException("Connection to database failed.");
+//        return itemList;
+//    }
+
     /**
-     * Creates an instance. This class holds all item objects. The method @link
+     * Creates an instance. This class holds all item objects.
      */
     ItemCatalog() {
         addItems();
@@ -39,8 +50,13 @@ public class ItemCatalog {
      * If the desired item isn't found, then return null.
      * @param itemID
      * @return Return the found ItemDTO.
+     * @throws InvalidItemIDException if the specified item id does not exist.
+     * @throws ItemCatalogException if the specified item id is a negative value. This exception serves as a dummy
+     * exception for simulating database failure (seminar 4 task 1b) ).
      */
-    public ItemDTO fetchItem(int itemID) throws InvalidItemIDException {
+    public ItemDTO fetchItem(int itemID) throws InvalidItemIDException, ItemCatalogException {
+        if(itemID < 0)
+            throw new ItemCatalogException("Could not connect to the database.");
         for(ItemDTO item : itemList) {
             if(item.getItemID() == itemID)
                 return item;
@@ -49,16 +65,19 @@ public class ItemCatalog {
     }
 
     /**
-     * A dummy method creating sample items.
+     * A dummy method creating sample items. The fourth item added is a sample item that is supposed to trigger a
+     * database failure as mentioned in seminar 4 as a suggestion for solving task 1 b)
      */
     private void addItems() {
         ItemDescriptionDTO appleDescription = new ItemDescriptionDTO("Apple", new Amount(10), VAT_TWENTY_FIVE);
         ItemDescriptionDTO milkDescription = new ItemDescriptionDTO("Milk", new Amount(20), VAT_TWELVE);
         ItemDescriptionDTO SpinachDescription = new ItemDescriptionDTO("Spinach", new Amount(30), VAT_TWELVE);
+        ItemDescriptionDTO errorDescription = new ItemDescriptionDTO("error", new Amount(0), VAT_TWENTY_FIVE);
 
         itemList.add(new ItemDTO(1, appleDescription));
         itemList.add(new ItemDTO(2, milkDescription));
         itemList.add(new ItemDTO(3, SpinachDescription));
+        itemList.add(new ItemDTO(-1, errorDescription));
 
     }
 }
