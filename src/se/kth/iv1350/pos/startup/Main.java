@@ -26,7 +26,7 @@ public class Main {
             View view = new View(controller);
             view.sampleExecution();
         } catch (IOException e) {
-            System.out.println("Unable to start application");
+            System.out.println("Unable to start the application");
             e.printStackTrace();
         }
     }

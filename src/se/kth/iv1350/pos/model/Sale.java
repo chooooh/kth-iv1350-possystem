@@ -20,14 +20,10 @@ public class Sale {
     private List<SaleObserver> saleObservers = new ArrayList<>();
 
     /**
-     * Registers observer to the saleObservers list. Any observer in the list will get notified when this object changes
+     * Registers observers to the saleObservers list. Any observer in the list will get notified when this object changes
      * state.
-     * @param observer The observer that shall be requested.
+     * @param observers The observers that should be observed.
      */
-    public void addSaleObserver(SaleObserver observer) {
-        saleObservers.add(observer);
-    }
-
     public void addSaleObservers(List<SaleObserver> observers) {
         saleObservers.addAll(observers);
     }
@@ -37,6 +33,7 @@ public class Sale {
             observer.newSale(payment);
         }
     }
+
     /**
      * Creates a new instance and saves the time of the sale.
      */
@@ -111,9 +108,9 @@ public class Sale {
     }
 
     /**
-     * This method handles the pay operation.
-     * @param payment
-     * @return
+     * This method handles the pay operation by invoking necessary operations. This method also
+     * @param payment the customers payment.
+     * @return the amount of change to give to the customer.
      */
     public Amount pay(CashPayment payment) {
         this.payment = payment;

@@ -14,6 +14,7 @@ public class TotalRevenueView implements SaleObserver {
     }
 
     private void printCurrentState() {
-        System.out.println("Total Income: " + income.getAmount());
+        System.out.print("\nTotalRevenueView - ");
+        System.out.println("Total Income: " + income.getAmount() + "\n");
     }
 }
