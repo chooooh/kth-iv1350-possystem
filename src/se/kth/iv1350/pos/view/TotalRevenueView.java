@@ -8,8 +8,8 @@ public class TotalRevenueView implements SaleObserver {
     private Amount income = new Amount(0);
 
     @Override
-    public void newSale(CashPayment cashPayment) {
-        income.add(cashPayment.getTotalCost());
+    public void newSale(Amount paidAmount) {
+        income.add(paidAmount);
         printCurrentState();
     }
 

@@ -42,7 +42,7 @@ public class View {
         controller.setStoreInfo(new RetailStore("IKA", "Stenvägen 123"));
 
         registerItem(5, 1);
-        registerItem(-100, 1);
+        registerItem(-1, 1);
 
         registerItem(1, 1);
         registerItem(2, 2);
@@ -59,10 +59,10 @@ public class View {
             String scannedItem = controller.registerItem(itemID, quantity);
             System.out.println("Scanned item: " + scannedItem);
         } catch (InvalidItemIDException e) {
-            errorMessageHandler.showErrorMsg(e);
+            errorMessageHandler.showErrorMsg("Specified itemID does not exist: " + e.getItemIDThatDoesNotExist());
             logger.logException(e);
         } catch (ItemCatalogException e) {
-            errorMessageHandler.showErrorMsg(e);
+            errorMessageHandler.showErrorMsg("Could not connect to the database.");
             logger.logException(e);
         }
     }

@@ -8,7 +8,7 @@ public interface SaleObserver {
 
     /**
      * Called when a sale has been paid.
-     * @param cashPayment contains the amount that has been paid.
+     * @param amountPaid contains the income.
      */
-    void newSale(CashPayment cashPayment);
+    void newSale(Amount amountPaid);
 }

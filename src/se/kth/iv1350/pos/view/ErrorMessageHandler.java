@@ -4,11 +4,11 @@ import java.util.Date;
 
 class ErrorMessageHandler {
 
-    void showErrorMsg(Exception e) {
+    void showErrorMsg(String msg) {
         StringBuilder sb = new StringBuilder();
         sb.append(createDate());
         sb.append(", ERROR: ");
-        sb.append(e.getMessage());
+        sb.append(msg);
         System.out.println(sb);
     }
 

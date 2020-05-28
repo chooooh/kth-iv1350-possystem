@@ -30,7 +30,7 @@ public class Sale {
 
     private void notifyObservers() {
         for(SaleObserver observer : saleObservers) {
-            observer.newSale(payment);
+            observer.newSale(runningTotal);
         }
     }
 
