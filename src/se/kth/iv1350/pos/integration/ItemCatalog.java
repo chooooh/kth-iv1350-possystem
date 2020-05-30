@@ -6,30 +6,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This method handles the <code>ItemCatalog</code> class. It has several VAT constants.
+ * This method handles the <code>ItemCatalog</code> class. It has several VAT constants. This class uses the Singleton
+ * Pattern to restrict more than one instantiations.
  */
 public class ItemCatalog {
-    private List<ItemDTO> itemList = new ArrayList<ItemDTO>();
+    private static final ItemCatalog ITEM_CATALOG = new ItemCatalog();
+
+    private List<ItemDTO> itemList = new ArrayList<>();
     private final Amount VAT_TWENTY_FIVE = new Amount(1.25);
     private final Amount VAT_TWELVE = new Amount(1.12);
     private final Amount VAT_FIVE = new Amount(1.05);
 
-//    /**
-//     * Just a method used to simulate database failure
-//     * @return The itemlist containng all items.
-//     * @throws ItemCatalogException if the database fails.
-//     */
-//    public List<ItemDTO> getItemList() throws ItemCatalogException{
-//        if(itemList == null)
-//            throw new ItemCatalogException("Connection to database failed.");
-//        return itemList;
-//    }
-
     /**
      * Creates an instance. This class holds all item objects.
      */
-    ItemCatalog() {
+    private ItemCatalog() {
         addItems();
+    }
+
+    /**
+     * A get method that returns the only ItemCatalog instance, according to the Singleton Pattern.
+     * @return the only ItemCatalog instance.
+     */
+    public static ItemCatalog getItemCatalog() {
+        return ITEM_CATALOG;
     }
 
     /**

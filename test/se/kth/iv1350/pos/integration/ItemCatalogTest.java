@@ -14,7 +14,7 @@ class ItemCatalogTest {
 
     @BeforeEach
     void setUp() {
-        itemCatalog = new ItemCatalog();
+        itemCatalog = ItemCatalog.getItemCatalog();
     }
 
     @AfterEach

@@ -9,7 +9,7 @@ public class CatalogCreator {
     private DiscountCatalog discountCatalog;
 
     public CatalogCreator() {
-        itemCatalog = new ItemCatalog();
+        itemCatalog = ItemCatalog.getItemCatalog();
         discountCatalog = new DiscountCatalog();
     }
 
