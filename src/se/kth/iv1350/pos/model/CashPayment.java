@@ -24,7 +24,7 @@ public class CashPayment {
      * @param sale
      */
     void getTotalPrice(Sale sale) {
-        totalCost = sale.calculateTotal();
+        totalCost = sale.getRunningTotal();
     }
 
     /**

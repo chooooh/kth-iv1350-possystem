@@ -41,11 +41,13 @@ public class View {
 
         controller.setStoreInfo(new RetailStore("IKA", "Stenvägen 123"));
 
-        registerItem(5, 1);
+        registerItem(5, 2);
         registerItem(-1, 1);
 
         registerItem(1, 1);
         registerItem(2, 2);
+
+        controller.checkDiscount(5);
 
         System.out.println("");
 

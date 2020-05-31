@@ -63,8 +63,10 @@ public class Controller {
      * @return A string discount to display on the view.
      */
     public String checkDiscount(int customerID) {
-        Discount discount = discountCatalog.checkDiscount(customerID);
-        String infoToDisplay = discount.getDiscount().toString();
+        currentSale.setCustomerID(customerID);
+        Amount newTotalPrice = discountCatalog.checkDiscount(currentSale);
+        currentSale.setRunningTotal(newTotalPrice);
+        String infoToDisplay = newTotalPrice.toString();
         return infoToDisplay;
     }
 

@@ -20,10 +20,10 @@ class DiscountCatalogTest {
         discountCatalog = null;
     }
 
-    @Test
-    void TestCheckDiscount() {
-        Discount expectedDiscount = new Discount(new Amount(0.8));
-        Discount actualDiscount = discountCatalog.checkDiscount(100001);
-        assertEquals(expectedDiscount, actualDiscount, "The expected discount object does not match the actual discount.");
-    }
+//    @Test
+//    void TestCheckDiscount() {
+//        Discount expectedDiscount = new Discount(new Amount(0.8));
+//        Discount actualDiscount = discountCatalog.checkDiscount(100001);
+//        assertEquals(expectedDiscount, actualDiscount, "The expected discount object does not match the actual discount.");
+//    }
 }

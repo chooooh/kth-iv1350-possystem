@@ -39,6 +39,10 @@ public class Amount {
         return new Amount(this.amount - other.amount);
     }
 
+    public boolean greaterThan(Amount other) {
+        return this.amount > other.amount;
+    }
+
     @Override
     public String toString() {
         return "Amount{" +

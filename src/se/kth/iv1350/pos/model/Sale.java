@@ -18,6 +18,7 @@ public class Sale {
     private RetailStore retailStore;
     private CashPayment payment;
     private List<SaleObserver> saleObservers = new ArrayList<>();
+    private int customerID;
 
     /**
      * Registers observers to the saleObservers list. Any observer in the list will get notified when this object changes
@@ -41,7 +42,7 @@ public class Sale {
         runningTotal = new Amount(0);
     }
 
-    HashMap<ItemDTO, Integer> getItemDTOMap() {
+    public HashMap<ItemDTO, Integer> getItemDTOMap() {
         return itemMap;
     }
 
@@ -55,6 +56,19 @@ public class Sale {
 
     public CashPayment getPayment() {
         return payment;
+    }
+
+    public void setRunningTotal(Amount runningTotal) {
+        this.runningTotal = runningTotal;
+    }
+
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
+    }
+
+    {}
+    public int getCustomerID() {
+        return customerID;
     }
 
     /**
