@@ -52,8 +52,4 @@ class ViewTest {
         assertTrue(printout.contains(expectedOutput), "UI did not start correctly.");
     }
 
-//    @Test
-//    void testAddItemReceipt() {
-//        isntance
-//    }
 }

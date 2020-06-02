@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * This method handles the <code>ItemCatalog</code> class. It has several VAT constants. This class uses the Singleton
- * Pattern to restrict more than one instantiations.
+ * Pattern to restrict more than one instantiation.
  */
 public class ItemCatalog {
     private static final ItemCatalog ITEM_CATALOG = new ItemCatalog();

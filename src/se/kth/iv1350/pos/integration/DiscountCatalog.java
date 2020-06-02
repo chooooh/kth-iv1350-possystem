@@ -28,7 +28,6 @@ public class DiscountCatalog {
         Amount newTotalPrice = currentSale.getRunningTotal();
         for(Discount discount : discounts) {
             newTotalPrice = discount.findDiscount(currentSale, newTotalPrice);
-            System.out.println(newTotalPrice);
         }
         return newTotalPrice;
     }

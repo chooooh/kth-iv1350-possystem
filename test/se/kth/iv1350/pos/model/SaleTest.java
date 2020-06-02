@@ -51,7 +51,7 @@ class SaleTest {
     }
 
     @Test
-    void TestCalculateTotal() {
+    void testCalculateTotal() {
         ItemDescriptionDTO appleDescription = new ItemDescriptionDTO("Apple", new Amount(10), new Amount(1.25));
         ItemDescriptionDTO milkDescription = new ItemDescriptionDTO("Milk", new Amount(20), new Amount(1.12));
         ItemDescriptionDTO spinachDescription = new ItemDescriptionDTO("Spinach", new Amount(30), new Amount(1.05));
@@ -67,7 +67,7 @@ class SaleTest {
     }
 
     @Test
-    void Pay() {
+    void pay() {
         Controller controller = new Controller(new CatalogCreator(), new ExternalSystemCreator(), new Printer());
         controller.startSale();
         controller.setStoreInfo(new RetailStore("IKA", "Stenvägen 123"));
