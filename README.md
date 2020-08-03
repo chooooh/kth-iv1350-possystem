@@ -1,3 +1,3 @@
 # kth-iv1350-possystem
-skoluppgift
 
+POS system för kursen IV1350 Objekt orienterad design.
